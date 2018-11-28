@@ -44,6 +44,7 @@
   * [String Counting Problems](string-problems/string-counting-problems.md)
   * [Tricky String problems](string-problems/tricky-string-problems.md)
 * [Binary Search](binary-search/README.md)
+  * [Corner cases](binary-search/corner-cases.md)
   * [Search in array](binary-search/search-in-array.md)
   * [Median in two sorted arrays](binary-search/median-in-two-sorted-arrays.md)
   * [Rotated array](binary-search/rotated-array.md)

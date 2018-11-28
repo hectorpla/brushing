@@ -10,3 +10,19 @@ At the last level, 1231 and 1132 have shared starting 1, overlapped
 
 ### Counting the substrings with at least k consecutive vowels
 
+
+
+### 730. Count Different Palindromic Subsequences
+
+{% hint style="info" %}
+difficulties:
+
+1. what to do with pattern like "a\_a", and pattern like "a\_b"
+2. how to combine: the count for aXa and X
+{% endhint %}
+
+proposal:
+
+when s\[i\] != s\[j\], count\(i, j\) = count\(i+1, j\) + count\(i, j-1\) + count\(i+1, j-1\)  
+otherwise, count\(i, j\) = 2 \* count\(i+1, j-1\)    &lt;=== this is wrong \(single char and empty str\)
+
