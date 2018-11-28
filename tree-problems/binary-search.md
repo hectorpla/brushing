@@ -38,8 +38,6 @@ three cases: below p, above p, no
 solve it iteratively and recursively  
 follow up: what if parent pointers are given \(salesforce\):  ancestor that after the first right turn under the _above_ case 
 
-![](../.gitbook/assets/285-suc-in-bst.jpeg)
-
 ### 
 
 ### 776. Split BST

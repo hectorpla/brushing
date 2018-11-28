@@ -5,8 +5,6 @@
 Too many cases for a divide & conquer solution, too different mind set for two approaches  
 1. parent-child swap; 2. descendants of a node swap; direct descendant swaps are tricky
 
-![](../.gitbook/assets/img_2001.jpeg)
-
 the case at the bottom is counter part for just checking local reverse \(parent-child reverse\); however, in-order traverse is global check
 
 refer to concise solution: [https://leetcode.com/problems/recover-binary-search-tree/discuss/32535/No-Fancy-Algorithm-just-Simple-and-Powerful-In-Order-Traversal](https://leetcode.com/problems/recover-binary-search-tree/discuss/32535/No-Fancy-Algorithm-just-Simple-and-Powerful-In-Order-Traversal), very neat part of the solution is that it **swaps node values instead of pointers**

@@ -14,8 +14,6 @@ two ways to perception: 1. from node, 2. from **edge**: remove edges
 
 Nov: saw solution, new alternatives: find the longest path
 
-![simply doing BFS is incorrect](../../.gitbook/assets/310.jpeg)
-
 ### 207. Course Schedule
 
 recipe:  remove **node** in the **current** level

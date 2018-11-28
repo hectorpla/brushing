@@ -16,8 +16,6 @@ Initially convert the edge collection into adjacent lists,
 * DFS: construct dependencies graph: dependant -&gt; dependency \(same direction of the definition, top-down\)
 * BFS: construct successor graph: prerequisite -&gt; children \(the other way around\)
 * 
-![](../../.gitbook/assets/dep_graph.jpeg)
-
 ```python
 def canFinish(numCourses, prerequisites):
     """

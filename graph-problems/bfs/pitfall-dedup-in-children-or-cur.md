@@ -2,8 +2,6 @@
 
 ### 863. All Nodes Distance K in Binary Tree
 
-![](../../.gitbook/assets/863.png)
-
 Notice: annotating parents introduces **cycles**, should keep track of visited nodes when doing BFS
 
 #### dedup in current level vs. dedup in children

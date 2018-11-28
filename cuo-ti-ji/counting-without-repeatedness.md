@@ -8,7 +8,5 @@
 
 At the last level, 1231 and 1132 have shared starting 1, overlapped
 
-![](../.gitbook/assets/permuatation2.jpeg)
-
 ### Counting the substrings with at least k consecutive vowels
 

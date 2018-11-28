@@ -21,8 +21,6 @@ description: lc 126
 
 When should set that a node is visited, either when popped and when as a child **no longer** works
 
-![Set when we pop a node, edges to the nodes in the same level that hasn&apos;t been met can be added](../.gitbook/assets/set_when_pop%20%281%29.jpeg)
-
 ![Set when we traverse children, too strict: allow one parent for each node](../.gitbook/assets/set_as_child%20%281%29.jpeg)
 
 working approach: add all edges to the next layer first, then set them all visited

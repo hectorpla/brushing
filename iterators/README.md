@@ -1,31 +1,43 @@
 # Iterators
 
+## Conclusion
 
+### invariants: the methodologies to write good OO programs \(classes\)
 
-recipe for tree-like traversal: 
+### recipe for nested structure, like tree traversal: 
 
-* determine the type of elems in stack, can it be nullable
+* determine the type of elems in **stack**, can it be nullable; should maintain **another** var?
 * invariant after calling hasNext\(\) and next\(\)
-* combination of the two methods
 
-recipe for general iterator:
+### **recipe for general iterator:**
 
 * propose variables to maintain
-* advance\(\) helper method and its pre- post- condition
-* 
+* **invariant** before yielding the next value - advance\(\) helper method and its pre- post- condition
+* decide where to keep the invariant \(sometimes inside next\(\) method, sometimes inside hasNext\(\) \)
+
+## Problems
+
 ### 281. Zigzag/Cyclic Iterator
 
-did a slow solution
+{% hint style="info" %}
+1. variables: a queue, each item is \(vec: 'a\[\], p: int\) pair, 
+2. invariant: for every pair in the queue, p is in boundary
+3. when pop from a q, ensure the invariant when appending
+{% endhint %}
+
+like round-robin, using **queue**
 
 ### 341. Flatten Nested List Iterator
 
 When using stack to simulate recursion, think about what is the type of the elements in the stack: in the cases of trees, it should be **Node**. In this problem it's NestedInteger
 
-should be aware that in the stack, every nodes is in an array!!!
+here, because all nodes printed are **terminal/leave** node, traversal can be deemed as **pre-order \(the easiest case to make iterative\)**
 
-
-
-here, because all nodes printed are **terminal** node, traversal can be deemed as **pre-order \(the easiest case to make iterative\)**
+{% hint style="info" %}
+1. **vars: a stack where every element is a NestedInteger**
+2. **invariant before return a next val: the last elem in the stack is an Integer**
+3. **maintain invariant before calling next\(\), that is, in hasNext**
+{% endhint %}
 
 ```python
 class NestedIterator(object):
@@ -39,7 +51,8 @@ class NestedIterator(object):
         raise Exception('no next')
         
     def hasNext(self):
-        # invariant: after calling this method, stack should be empty of the last elem is an integer
+        # invariant: after calling this method, 
+        # the last elem is an integer or stack should be empty
         while self.stack and not self.stack[-1].isInteger():
             self.stack.extend(reversed(self.stack.pop().getList()))
         return len(self.stack) > 0
@@ -50,6 +63,12 @@ class NestedIterator(object):
 ### 173. Binary Search Tree Iterator
 
 solution 1: like in iterative traversal \(spent much time\)
+
+{% hint style="info" %}
+1. vars: a stack, elems are tree node; a cur node awaiting to append into the stack
+2. invariant before return the next val: cur is None
+3. when?: before calling next\(\)
+{% endhint %}
 
 ```python
 class BSTIterator(object):
@@ -127,7 +146,11 @@ class BSTIterator(object):
 
 ### 284. Peeking Iterator
 
-precondition before checking the next value: either the iterator is empty or the peekElem is not None 
+{% hint style="info" %}
+1. vars: current value, and the original iterator
+2. invariant before next and peek: the cur is not None
+3. when: right before the real logic inside peek\(\) or next\(\) 
+{% endhint %}
 
 ```python
 class PeekingIterator(object):
@@ -161,6 +184,12 @@ class PeekingIterator(object):
 
 ### 251. Flatten 2D Vector
 
+{% hint style="info" %}
+1. vars: current row and current column
+2. invariant before return next: row is in bound, col is in bound
+3. when: before return
+{% endhint %}
+
 take-away: see  \_advance\(\) method
 
 ```python
@@ -187,5 +216,54 @@ class Vector2D(object):
             self.row += 1
             self.col = 0
         # post: row == len(vecs) or col < len(vecs[row])
+```
+
+### 604. Design Compressed String Iterator
+
+{% hint style="info" %}
+1. vars: pointer in the str, a remaining count, next char pos 
+2. invariant: p pointing to a char where the remaining count &gt; 0
+3. when: before next
+{% endhint %}
+
+```python
+class StringIterator(object):    
+    # caveat: should parse number
+    def __init__(self, compressedString):
+        """
+        :type compressedString: str
+        """
+        self.string = compressedString
+        self.p = 0
+        self.remaining = 0
+        self.nextCharPos = 0
+
+    def next(self):
+        """
+        :rtype: str
+        """
+        # the context of this problem: don't call hasNext() before next(), should do it here
+        if not self.hasNext():
+            return " "
+        self.remaining -= 1
+        return self.string[self.p]
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        # maintain here
+        n = len(self.string)
+        while self.remaining == 0:
+            # parse number
+            self.p = self.nextCharPos
+            if self.p == n:
+                break
+            start = i = self.p + 1
+            while i < n and self.string[i].isdigit():
+                i += 1
+            self.nextCharPos = i
+            self.remaining = int(self.string[start:i])
+        return self.remaining > 0
 ```
 
