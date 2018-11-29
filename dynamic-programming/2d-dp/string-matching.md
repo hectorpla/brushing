@@ -96,3 +96,22 @@ Better Definition:
 
 to solve
 
+
+
+### 664. Strange Printer
+
+drew search trees
+
+{% hint style="info" %}
+minsteps\(i, j\): min steps taken to form the target substring s\[i:j+1\]
+
+after 2hr of try-and-error ==&gt;  Wrong solution \(151/201\)  
+`minsteps(i, j) =   
+  minsteps(i, k) + minsteps(k+1, j) for k in [i, j] if s[i] != s[j]  
+  1 + minsteps(start, end) for all [start, end] windows between which s[k] != s[i] for k in [start, end]`
+
+`counter example: "bacbcaabb"`
+
+The top sol not understand well
+{% endhint %}
+

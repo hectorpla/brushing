@@ -63,3 +63,9 @@ def coinChange(coins, amount):
     return dp[amount] if dp[amount] < float('inf') else -1 # bug: take care of the impossible cases
 ```
 
+
+
+### 416. Partition Equal Subset Sum
+
+can tackle with BFS
+

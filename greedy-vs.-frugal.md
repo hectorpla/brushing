@@ -1,4 +1,4 @@
-# Greedy vs. frugal
+# Greedy vs. lazy
 
 ## Parsing
 
