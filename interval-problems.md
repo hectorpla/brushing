@@ -73,34 +73,7 @@ class SummaryRanges {
 }
 ```
 
-### 218. The Skyline Problem
-
-O\(n^2\), 
-
-
-
-O\(nlogn\) solution from Leetcode server:  
-1. collect all the important points, and scan them from left to right on the axis   
-2. maintain a heap to keep track of the highest height ever
-
-```python
-def getSkyline(self, buildings):
-    corners = sorted({b[0] for b in buildings} | {b[1] for b in buildings})
-    print(corners)
-    j = 0
-    res = [(0,0)]
-    heap = [(0,float('inf'))]
-    heapq.heapify(heap)
-    for x in corners:
-        while j < len(buildings) and buildings[j][0] == x:
-            heapq.heappush(heap,(-buildings[j][2],buildings[j][1]))
-            j += 1
-        while heap[0][1] <= x:
-            heapq.heappop(heap)
-        if -heap[0][0] != res[-1][1]:
-            res.append((x, -heap[0][0]))
-    return res[1:]
-```
+### 
 
 ### 435. Non-overlapping Intervals
 
