@@ -28,3 +28,16 @@ proposal:
 when s\[i\] != s\[j\], count\(i, j\) = count\(i+1, j\) + count\(i, j-1\) + count\(i+1, j-1\)  
 otherwise, count\(i, j\) = 2 \* count\(i+1, j-1\)    &lt;=== this is wrong \(single char and empty str\)
 
+
+
+thinking process for the top sol in discuss:
+
+cases:
+
+* a\_b
+* a\_a
+* a\_a\_a
+* a\_a\_a\_a
+
+![](../.gitbook/assets/730_count_palindrome.jpeg)
+

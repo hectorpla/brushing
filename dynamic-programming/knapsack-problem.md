@@ -7,6 +7,15 @@
 
 
 
+## Problems
+
+### 494. Target Sum
+
+points to consider:
+
+* constrains: the target &lt;= 1000; what's more, T is bounded by the sum of the int vector
+* O\(T\) space filling
+
 ### 518. Coin Change 2 \(unbounded\)
 
 ```python
