@@ -1,4 +1,17 @@
+---
+description: 'Nov, Dec'
+---
+
 # Connected Components
+
+## Recipe
+
+should identify if the graph is **directed** or **undirected**
+
+* use Union-find in undirected graph
+* DFS works for both cases?
+
+### 
 
 ### 839. Similar String Groups
 
@@ -8,7 +21,7 @@
 
 directed graph having the following properties:
 
-![](../.gitbook/assets/565.jpeg)
+![](../../.gitbook/assets/565.jpeg)
 
 approaches:  
 

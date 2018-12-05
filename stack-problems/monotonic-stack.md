@@ -1,6 +1,78 @@
+---
+description: optimize quadratic to linear
+---
+
 # Monotonic stack
 
+## Recipes
+
+* FILO pattern
+* Identify what to find, see 739, 84
+* determine monotonicity -&gt; inc, non-dec; dec, non-inc
+
+most tricky problem: 132 pattern
+
+## Problems
+
+### 739. Daily Temperatures
+
+{% hint style="info" %}
+**what**: for index i, find the leftmost index j: `j > i and T[j] > T[i]`; scanning from the back
+
+**mono**: strictly decreasing, while we find`T[k] >= T[stack[-1]]`, index stack\[-1\] is no longer needed
+{% endhint %}
+
+tool for optimizing this kind of problems
+
+### 84. Largest Rectangle in Histogram
+
+{% hint style="info" %}
+**what**: for index `t`  
+the leftmost i: `i <= t and heights[k] >= heights[t] for k in [i, t]`  
+the rightmost j: `j >= t and heights[k] >= heights[t] for k in [t, j]`
+
+**mono**: strictly increasing, H\[k\] &lt;= H\[stack\[-1\]\] , we can skip the H\[stack\[-1\]\] which is larger or equal
+{% endhint %}
+
+```python
+def largestRectangleArea(self, heights):
+    n = len(heights)
+    leftmost = [-1] * n
+    rightmost = [-1] * n
+
+    stack = []
+    for i, h in enumerate(heights):
+        while stack and h <= heights[stack[-1]]:
+            stack.pop()
+        leftmost[i] = stack and (stack[-1] + 1) or 0
+        stack.append(i)
+    
+    # almost the same logic
+    stack = []
+    for j in range(n-1, -1, -1):
+        while stack and heights[j] <= heights[stack[-1]]:
+            stack.pop()
+        rightmost[j] = stack[-1] - 1 if stack else n-1 # bug: stack and (stack[-1] - 1) or n-1, stack[-1] - 1 can be zero!!!
+        stack.append(j)
+    # print(leftmost, rightmost)
+    
+    result = 0
+    for k, (i, j) in enumerate(zip(leftmost, rightmost)):
+        height = heights[k]
+        result = max(result, height * (j - i + 1))
+    return result
+
+# tests
+# [1,3,1]
+# [1,1,1,3]
+# [1,1,5,3,3,2]
+```
+
 ### 42. Trapping Rain Water
+
+what: find **212 pattern**: `i < k < j, height[i] > height[k] and height[k] < height[j]`
+
+mono: a little bit tricky here, consider case \[3,2,1,2,5\]
 
 ```python
 def trap(self, height):
@@ -9,11 +81,13 @@ def trap(self, height):
     
     result = 0
     for rightIndex, rightHeight in enumerate(height):
+        
         while stack and rightHeight >= height[stack[-1]]:
             base = height[stack.pop()]
             if stack:
                 leftIndex = stack[-1]
                 leftHeight = height[leftIndex]
+                # accumulate when `1` in `212` pattern poped
                 result += (min(leftHeight, height[rightIndex]) - base) * (rightIndex - leftIndex - 1)
         # bug: [4,2,3]
         stack.append(rightIndex)
@@ -23,18 +97,6 @@ def trap(self, height):
 buggy code, order of doing things
 
 4 different approaches to tackle this problem
-
-### 84. histogram
-
-### 503. Next Greater Element II
-
-associate the right values to left
-
-solution: clever to deal with circular structure instead of copying -&gt; modulo
-
-### 402. Remove K Digits
-
-greedy: increasing stack
 
 ### 456. 132 Pattern
 
@@ -71,11 +133,17 @@ maintaining a decreasing stack eliminates unnecessary compares:
 
 bonus: approach \#3 in official solution
 
+### 503. Next Greater Element II
 
+associate the right values to left
+
+solution: clever to deal with circular structure instead of copying -&gt; **modulo**, my original sol: **concat** two copy, tail to head
+
+### 402. Remove K Digits
+
+greedy: increasing stack, remove **21 pattern \(inverse consecutive pairs\)**
 
 ### 484. Find Permutation
 
-also greedy
-
-
+greedy, take care of the `D*`  patterns
 
