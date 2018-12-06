@@ -115,3 +115,5 @@ after 2hr of try-and-error ==&gt;  Wrong solution \(151/201\)
 The top sol not understand well
 {% endhint %}
 
+_Optimization_: !!!! 
+

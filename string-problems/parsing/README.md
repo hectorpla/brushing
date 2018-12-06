@@ -10,3 +10,9 @@
 
 
 
+### Nested structure
+
+1. recognize node type
+2. draw tree
+3. symmetric property of nesting \(`[` vs `]`\)
+
