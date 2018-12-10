@@ -2,7 +2,7 @@
 description: 'Jul, Nov'
 ---
 
-# Binary Search
+# Binary Search \(encoding\)
 
 ### 222. Count complete tree nodes
 

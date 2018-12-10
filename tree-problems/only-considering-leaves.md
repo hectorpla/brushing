@@ -1,4 +1,4 @@
-# Only considering leaves
+# Leaves are base cases
 
 ### 872. Leaf-Similar Trees
 

@@ -12,6 +12,10 @@ description: optimize quadratic to linear
 
 most tricky problem: 132 pattern
 
+### How do we develop into this method?
+
+brute force: **from perspective of each point**, see analysis for problem 42
+
 ## Problems
 
 ### 739. Daily Temperatures
@@ -74,6 +78,12 @@ what: find **212 pattern**: `i < k < j, height[i] > height[k] and height[k] < he
 
 mono: a little bit tricky here, consider case \[3,2,1,2,5\]
 
+{% hint style="info" %}
+brute force: from perspective of each bar k:  
+find the right most i: `i > k and height[i] >= height[k]`  
+find the left most j: `j > k and height[j] >= height[k]`
+{% endhint %}
+
 ```python
 def trap(self, height):
     # tag: stack, maintain a decreasing stack
@@ -88,7 +98,7 @@ def trap(self, height):
                 leftIndex = stack[-1]
                 leftHeight = height[leftIndex]
                 # accumulate when `1` in `212` pattern poped
-                result += (min(leftHeight, height[rightIndex]) - base) * (rightIndex - leftIndex - 1)
+                result += (min(leftHeight, rightHeight) - base) * (rightIndex - leftIndex - 1)
         # bug: [4,2,3]
         stack.append(rightIndex)
     return result

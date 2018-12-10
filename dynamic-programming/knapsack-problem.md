@@ -5,9 +5,39 @@
 1. unbounded: dependent on the left cell and the upper cell
 2. 0-1 knapsack: dependent on the left cell and the upper-left cell
 
-
+try to do it in DFS manner
 
 ## Problems
+
+### 956. Tallest Billboard
+
+{% hint style="info" %}
+The most natural way to tackle is a 3-d knapsack problem, `d1` is the rods, `d2` and `d3` are the length sum of the two groups ==&gt; TLE
+
+but can compress the state, d2 and d3 can be **compressed** into only **one** dimension, take the difference! 
+{% endhint %}
+
+```python
+def tallestBillboard(rods):
+    k = len(rods)
+    t = sum(rods) // 2
+    
+    dp = [[[False] * (t + 1) for _ in range(t + 1)] for _ in range(k+1)]
+    dp[0][0][0] = True
+    
+    for k in range(1, k+1):
+        rodLength = rods[k-1]
+        for i in range(t+1):
+            for j in range(t+1):
+                dp[k][i][j] = (i >= rodLength and dp[k-1][i-rodLength][j] 
+                               or j >= rodLength and dp[k-1][i][j-rodLength]
+                               or dp[k-1][i][j])
+    result = 0
+    for i in range(1, t + 1):
+        if dp[k][i][i]:
+            result = i
+    return result
+```
 
 ### 494. Target Sum
 
