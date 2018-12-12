@@ -63,9 +63,15 @@ class BinaryIndexTree():
         # 
         # start ..===> end
         #  nstart <..==> nend
-        if nend >= start or nstart <= end:
-            return self._query(node.left, start, end) + self._query(node.right, start, end)
-        return 0
+        #if nend >= start or nstart <= end: # <<<< TLE >>>>>
+        #    return self._query(node.left, start, end) + self._query(node.right, start, end)
+        
+        mid = (nstart + nend) // 2
+        if mid >= start:
+            result += self._query(node.left, start, end)
+        if mid + 1 <= end:
+            result += self._query(node.right, start, end)
+        return result
         
 class NumArray:
     

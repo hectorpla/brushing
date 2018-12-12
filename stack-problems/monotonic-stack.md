@@ -36,6 +36,8 @@ the leftmost i: `i <= t and heights[k] >= heights[t] for k in [i, t]`
 the rightmost j: `j >= t and heights[k] >= heights[t] for k in [t, j]`
 
 **mono**: strictly increasing, H\[k\] &lt;= H\[stack\[-1\]\] , we can skip the H\[stack\[-1\]\] which is larger or equal
+
+!!! **121 pattern**
 {% endhint %}
 
 ```python
@@ -45,20 +47,18 @@ def largestRectangleArea(self, heights):
     rightmost = [-1] * n
 
     stack = []
-    for i, h in enumerate(heights):
+    for i, h in enumerate(heights): # from start 
         while stack and h <= heights[stack[-1]]:
             stack.pop()
         leftmost[i] = stack and (stack[-1] + 1) or 0
         stack.append(i)
-    
-    # almost the same logic
+
     stack = []
-    for j in range(n-1, -1, -1):
+    for j in range(n-1, -1, -1): # from back
         while stack and heights[j] <= heights[stack[-1]]:
             stack.pop()
         rightmost[j] = stack[-1] - 1 if stack else n-1 # bug: stack and (stack[-1] - 1) or n-1, stack[-1] - 1 can be zero!!!
         stack.append(j)
-    # print(leftmost, rightmost)
     
     result = 0
     for k, (i, j) in enumerate(zip(leftmost, rightmost)):
@@ -70,6 +70,36 @@ def largestRectangleArea(self, heights):
 # [1,3,1]
 # [1,1,1,3]
 # [1,1,5,3,3,2]
+
+def largestRectangleArea(self, heights):
+    # a trick here:
+    heights.append(0) # so that all bars that have height > 0 are considered, eliminate the post-processing
+    
+    # maintain an increasing stack: 121 pattern
+    stack = [] # indices
+    
+    result = 0
+    for right, rightHeight in enumerate(heights):
+        # maintain the monotonicity: increasing
+        while stack and rightHeight <= heights[stack[-1]]:
+            index = stack.pop()
+            width = right - (stack[-1] if stack else -1) - 1
+            height = heights[index]
+            result = max(result, height * width)
+        stack.append(right)
+        
+    # corner: [1,2,3]
+    # increasing stack remained
+    # n = len(heights)
+    # while stack:
+    #     index = stack.pop()
+    #     width = n - 1 - (stack[-1] if stack else -1) # the top has no bar on the right that is greater than it
+    #     height = heights[index]
+    #     result = max(result, height * width)
+    return result
+
+# tests
+# [1,2,3]
 ```
 
 ### 42. Trapping Rain Water
@@ -82,6 +112,8 @@ mono: a little bit tricky here, consider case \[3,2,1,2,5\]
 brute force: from perspective of each bar k:  
 find the right most i: `i > k and height[i] >= height[k]`  
 find the left most j: `j > k and height[j] >= height[k]`
+
+**`212 pattern`**
 {% endhint %}
 
 ```python

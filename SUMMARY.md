@@ -116,6 +116,7 @@
 * [Number decode](number-decode.md)
 * [Divide & Conquer](divide-and-conquer.md)
 * [Data structure design](data-structure-design/README.md)
+  * [LRU cache](data-structure-design/lru-cache.md)
   * [295. Find Median from Data Stream](data-structure-design/295.-find-median-from-data-stream.md)
 * [Binary Indexed Tree \(Segment tree\)](binary-indexed-tree-segment-tree.md)
 * [Iterators](iterators/README.md)

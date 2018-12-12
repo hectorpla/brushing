@@ -1,3 +1,7 @@
+---
+description: 'Nov, Dec'
+---
+
 # Serialize & Deserialize
 
 ### 297 Serialize and Deserialize Binary Tree
@@ -111,7 +115,47 @@ in-order traversal of a BST is deterministic. Encode the tree into a pre-order s
 
 spent a lot of time in finding a O\(n\) method to decode, failed
 
+```python
+class Codec:    
+    # corner: duplicates
+    # [2,2,2] -> "2,2,2" -> [2,2,2] or [2,2,null,2] or [2,null,2,null,2]
+    # the solution seems not to cover those cases
+    def serialize(self, root):
+        # pre-order
+        result = []
+        def traverse(root):
+            if not root:
+                return
+            result.append(root.val)
+            traverse(root.left)
+            traverse(root.right)
+        traverse(root)
+        return ','.join(map(str, result))
 
+    def deserialize(self, data):
+        # corner
+        if not data: return None # "".split(',') yields [""]
+        # build from the pre-order
+        data = list(reversed(data.split(','))) # always pop from tail
+        def build(lowerBound, upperBound):
+            if not data:
+                return None
+            top = int(data[-1])
+            if not (lowerBound < top < upperBound):
+                return None
+            data.pop()
+            root = TreeNode(top)
+            root.left = build(lowerBound, top)
+            root.right = build(top, upperBound)
+            return root
+        return build(float('-inf'), float('inf'))
+        
+        # tests
+        # [1]
+        # [2,1]
+        # [1,null,2]
+        # [2,1,3]
+```
 
 ### 431. Encode N-ary Tree to Binary Tree
 
