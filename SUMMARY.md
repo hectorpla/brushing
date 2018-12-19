@@ -51,6 +51,7 @@
   * [Parsing](string-problems/parsing/README.md)
     * [385. Mini Parser](string-problems/parsing/385.-mini-parser.md)
     * [394. Decode String](string-problems/parsing/394.-decode-string.md)
+  * [String matching](string-problems/string-matching.md)
   * [String Transformation](string-problems/string-transformation.md)
   * [String backtracking](string-problems/string-backtracking.md)
   * [String Counting Problems](string-problems/string-counting-problems.md)
