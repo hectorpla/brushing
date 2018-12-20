@@ -8,6 +8,90 @@ description: 'June, Dec'
 
 ensure unique: make sure the first and the second number are unique
 
+```python
+def threeSum(self, nums):
+    n = len(nums)
+    
+    # 1. sort
+    nums.sort()
+    
+    # 2. fix first (distinct) and two-pointer to find (second, first) pairs
+    results = []
+    
+    for i, first in enumerate(nums):
+        if i and first == nums[i-1]:
+            continue
+        j, k = i + 1, n - 1
+        while j < k:
+            second, third = nums[j], nums[k]
+            # invariant: j should be the rightmost index for `second` and k should be the leftmost for `third`
+            if j > i + 1 and second == nums[j-1]: # bug: first condition
+                j += 1
+                continue
+            if k < n - 1 and third == nums[k+1]:
+                k -= 1
+                continue
+            su = first + second + third
+            if su == 0:
+                # deduplicated second and third
+                results.append([first, second, third])
+                j += 1
+                k -= 1
+            elif su < 0:
+                j += 1
+            elif su > 0:
+                k -= 1
+            else:
+                assert False # cannot reach here
+    return results
+    # tests
+    # []
+    # [1,2]
+    # [-1,0,1]
+    # [1,2,3]
+    # [-1,-1,2]
+    # [-2,1,1]
+    # [-1,-1,0,1]
+    # [-2,-1,0,1,2]
+```
+
+interesting solution from the sever \(refer to **Leetcode**\):
+
+```python
+    def threeSum(self, nums):
+        # count each number's frequency
+        freq = defaultdict(int)
+        for n in nums:
+            freq[n] += 1
+        results = set() # for deduplication
+        
+        # corner case
+        if 0 in freq and freq[0] > 2:
+            results.add((0,0,0))
+                
+        # property: 
+        #      of the 3 numbers, at least 1 positive and 1 negative
+        positives = [p for p in freq if p > 0]
+        negatives = [n for n in freq if n < 0]
+        
+        for p in positives:
+            for n in negatives:      
+                other = - p - n # leftover
+                
+                if other in freq: 
+                    # known: freq[other] must>0
+                    
+                    # if other == p or n, we need to make sure there are at least 2 other
+                    if other == p and freq[p] > 1:
+                        results.add((n, p, p)) # order can be known
+                    elif other == n and freq[n] > 1:
+                        results.add((n, n, p)) # order can be known  
+                    elif n < other < p:
+                        results.add((n, other, p))
+
+        return list(results)
+```
+
 ### 215. Kth Largest Element in an Array
 
 take-away: **invariant!**
@@ -71,25 +155,33 @@ loop invariants: left to lo are 0s, right to ho are 2s, left to mid are 0s or 1s
 post-condition: see the code
 
 ```python
-def sortColors(self, nums):
-    lo, mid, hi = 0, 0, len(nums) - 1
+def sortColors(nums):
+    # two-way sorting, three pointers
+    i, j = 0, len(nums) - 1
+    k = 0 # the pointer between i and j
     
-    # post conditions:
-    # [0], lo = 1 > mid = 0
-    # [1], m = 1 > lo = 0
-    # [2], hi = -1 < mid = 0
-    # [0,1], m = 2 > hi = 1
-    # [0,1,1,2], lo = 1, hi = 2, m = 3
-    
-    while mid <= hi: # important '=' sign
-        if nums[mid] == 0:
-            nums[lo], nums[mid] = nums[mid], nums[lo]
-            lo += 1
-            mid += 1 # bug: elements to the left of mid <= 1
-        elif nums[mid] == 2:
-            nums[mid], nums[hi] = nums[hi], nums[mid]
-            hi -= 1
+    while k <= j: # check termination
+        assert i <= k
+        # invariant: 
+        # nums[z] == 0 for z in [0, i) and nums[z] == 2 for z in (j, n-1]
+        # nums[z] <= 1 for z in [0, k)
+        if nums[k] == 0:
+            assert i == k or nums[i] == 1 # [0,1,1,0], took much time to think
+            nums[i], nums[k] = nums[k], nums[i]
+            i += 1                
+            k += 1 # critical and correct, safe to increase because now nums[k] == 1
+        elif nums[k] == 2:
+            nums[j], nums[k] = nums[k], nums[j]
+            j -= 1
         else:
-            mid += 1
+            k += 1
+        # print(i, k, j, nums)
+        # tests
+        # [0]
+        # [1]
+        # [2]
+        # [1,0]
+        # [2,1]
+        # [2,1,0]
 ```
 

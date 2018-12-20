@@ -154,4 +154,5 @@
 * [Not-fit-in-memory follow-up](not-fit-in-memory-follow-up.md)
 * [Greedy vs. lazy](greedy-vs.-frugal.md)
 * [GGL 面经](ggl-mian-jing.md)
+* [Practices for bookkeeping](practices-for-bookkeeping.md)
 
