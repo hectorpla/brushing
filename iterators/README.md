@@ -148,36 +148,46 @@ class BSTIterator(object):
 
 {% hint style="info" %}
 1. vars: current value, and the original iterator
-2. invariant before next and peek: the cur is not None
+2. invariant before returning next\(\) and peek\(\): the cur is not anchor
 3. when: right before the real logic inside peek\(\) or next\(\) 
 {% endhint %}
 
 ```python
-class PeekingIterator(object):
+class PeekingIterator:
     def __init__(self, iterator):
-        # assumption: contents do not include None
-        self.it = iterator
-        self.peekElem = None # unsafe, what if the content of the iterator can be None
-        # safe alternative, set it to an unique anchor (address)
+        """
+        Initialize your data structure here.
+        :type iterator: Iterator
+        """
+        self.anchor = object()  # a singleton for checking if the peekVal is valid 
+        self.peekVal = self.anchor
+        self.iter = iterator
 
     def peek(self):
-        self._advance()
-        return self.peekElem
-
+        """
+        Returns the next element in the iteration without advancing the iterator.
+        :rtype: int
+        """
+        # idempotent
+        if self.peekVal is self.anchor:  # not valid
+            if not self.iter.hasNext():
+                raise ValueError('calling next() on the empty iterator')
+            self.peekVal = self.iter.next()
+        return self.peekVal
+            
     def next(self):
-        self._advance()
-        ret = self.peekElem
-        self.peekElem = None
-        return ret
-        
-    def hasNext(self):
-        return not not self.peekElem or self.it.hasNext()
-        
-    def _advance(self):
-        """post-condition invariant: peekElem is not null or it has no next """
-        if not self.peekElem and self.it.hasNext():
-            self.peekElem = self.it.next()
+        """
+        :rtype: int
+        """
+        result = self.peek()
+        self.peekVal = self.anchor  # make the popped value invalid
+        return result
 
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return self.peekVal is not self.anchor or self.iter.hasNext()
 ```
 
 
