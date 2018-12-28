@@ -185,3 +185,9 @@ def sortColors(nums):
         # [2,1,0]
 ```
 
+
+
+### 360. Sort Transformed Array
+
+ends to middle vs. middle to ends
+

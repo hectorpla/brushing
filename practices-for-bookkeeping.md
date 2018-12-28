@@ -39,3 +39,69 @@ def pageListing(listings):  # Listing[] -> Listing[][]
     return pages
 ```
 
+
+
+
+
+### 498. Diagonal Traverse
+
+!!!! corner cases, the top-right and the bottom-left
+
+```python
+def findDiagonalOrder(self, matrix):
+    m, n = len(matrix), len(matrix[0]) if matrix else 0
+    
+    # two types of turns: 
+    # 1. up -> down:  
+    #   a. i < 0
+    #   b. j = n
+    # 2. down -> up
+    #   a. j < 0
+    #   b. i = m
+    dirs = [[-1,1], [1,-1]]
+    
+    result = []
+    i, j = 0, 0
+    d = 0
+    while len(result) < m * n:
+        # turnings
+        # bugs: top-right corner!!! order matters!!!
+        if j == n:  # check j first because the top-right corner is included into this case
+            assert d == 0
+            i, j = i + 2, j - 1
+            d = 1
+            continue
+        if i < 0:
+            assert d == 0
+            i += 1
+            d = 1
+            continue
+        if i == m:
+            assert d == 1
+            i, j = i - 1, j + 2
+            d = 0
+            continue
+        if j < 0:
+            assert d == 1
+            j += 1
+            d = 0
+            continue
+        
+        # invariant: i in [0, m), j in [0, n)
+        assert 0 <= i < m and 0 <= j < n
+        result.append(matrix[i][j])
+        di, dj = dirs[d]
+        i, j = i + di, j + dj
+        
+    return result
+
+# tests
+# []
+# [[]]
+# [[1]]
+# [[1,2,3]] # single row
+# [[1],[2],[3]] -- single col, test top-right corner
+# [[1,2,3],[4,5,6]] -- bottom-left corner
+# [[1,2,3],[4,5,6],[7,8,9]]
+```
+
