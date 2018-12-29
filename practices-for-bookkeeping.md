@@ -41,11 +41,11 @@ def pageListing(listings):  # Listing[] -> Listing[][]
 
 
 
-
-
 ### 498. Diagonal Traverse
 
 !!!! corner cases, the top-right and the bottom-left
+
+**not** good to **greedily** update \(i, j\), rewrite it!
 
 ```python
 def findDiagonalOrder(self, matrix):
@@ -103,5 +103,63 @@ def findDiagonalOrder(self, matrix):
 # [[1],[2],[3]] -- single col, test top-right corner
 # [[1,2,3],[4,5,6]] -- bottom-left corner
 # [[1,2,3],[4,5,6],[7,8,9]]
+```
+
+### 
+
+### 54. Spiral Matrix
+
+mostly hard-coded
+
+think about extendability \(tentative\):
+
+1. starting point \(top-left, bottom-left, etc.\)
+2. direction: clockwise or anti-clockwise
+
+```python
+def spiralOrder(self, matrix):
+    m, n = len(matrix), len(matrix[0]) if matrix else 0
+    result = []
+    
+    # bookkeep boundaries
+    upperRow, lowerRow = 0, m - 1
+    leftCol, rightCol = 0, n - 1
+    
+    dirs = [[0,1],[1,0],[0,-1],[-1,0]] # r, d, l, u
+    i, j = 0, 0  # the current position
+    d = 0
+    while len(result) < m * n:
+        assert upperRow <= i <= lowerRow and leftCol <= j <= rightCol  # invariant
+        result.append(matrix[i][j])
+        
+        # maintain the invariant: rules to turn 
+        # hard coded, should be more programmatic so that we can change the traverse order
+        if d == 0 and j == rightCol:
+            d = 1
+            upperRow += 1
+        elif d == 1 and i == lowerRow:
+            d = 2
+            rightCol -= 1
+        elif d == 2 and j == leftCol:
+            d = 3
+            lowerRow -= 1
+        elif d == 3 and i == upperRow:
+            d = 0
+            leftCol += 1
+        di, dj = dirs[d]
+        i, j = i + di, j + dj
+    return result
+# tests
+# []
+# [[]]
+# [[1]]
+# [[1,2]]
+# [[1,2,3]] - 1*3
+# [[1],[2]]
+# [[1],[2],[3]] - 3*1, r -> d
+# [[1,2],[3,4]] - 2*2, d -> l
+# [[1,2,3],[4,5,6]] -- 2*3
+# [[1,2,3],[4,5,6],[7,8,9]] -- 3*3, l -> u
+# [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
 ```
 

@@ -1,5 +1,5 @@
 ---
-description: 'Jul, Oct, Nov'
+description: 'Jul, Oct, Nov, Dec'
 ---
 
 # Toposort
@@ -8,7 +8,7 @@ description: 'Jul, Oct, Nov'
 
 two ways to tackle: 1. from every node fanning out 2. from the outmost **contour** shrinking in
 
-![start from 1-node vs. start from n-nodes](../../.gitbook/assets/310mht_roots.png)
+![start from 1-node vs. start from n-nodes](../../../.gitbook/assets/310mht_roots.png)
 
 two ways to perception: 1. from node, 2. from **edge**: remove edges
 
@@ -83,4 +83,6 @@ def canFinish(self, numCourses, prerequisites):
 # 3, [[1,0],[1,2]] -> True
 # 3, [[1,0],[0,2], [2,1]] -> False
 ```
+
+
 
