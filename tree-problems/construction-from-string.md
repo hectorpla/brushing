@@ -6,7 +6,7 @@ think about these problems: do post-/pre- order traversal and in-order traversal
 
 ## problems
 
-### Lint880. Construct Binary Tree from String
+### 536. Construct Binary Tree from String
 
 did it recursively; **iterative** solution also simple, try again
 
@@ -22,7 +22,6 @@ def str2tree(self, s):
     # "1(2(6)(7))(3()(8))", 3()(8) should be [3,null,8] instead of [3,0,8], wrong test case
     def construct():
         nonlocal cur
-
         # token: number
         sym = 1
         if s[cur] == '-':
@@ -47,7 +46,6 @@ def str2tree(self, s):
             root.right = construct()
             assert s[cur] == ')'
             cur += 1
-        
         return root
         
     return construct()

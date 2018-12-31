@@ -1,3 +1,7 @@
+---
+description: 'Jun, Dec'
+---
+
 # Tree Related
 
 
@@ -62,12 +66,8 @@ tricky to use: without using set to maintain met nodes, set children to None \(m
 
 ```python
 def validTree(self, n, edges):
-    # properties of tree: 
-    # 1. connected (one connected component), 2. no cycle
-
     if n - 1 != len(edges):
         return False
-
     def constructGraph(): # easy to construct given nodes as consecutive numbers
         graph = [[] for _ in range(n)]
         for a, b in edges:
@@ -76,14 +76,6 @@ def validTree(self, n, edges):
         return graph
 
     graph = constructGraph()
-
-    # test
-    # 1, [] -> True
-    # 2, [] -> False
-    # 2, [[0,1]] -> True
-    # 3, [[0,1],[2,1]] -> True
-    # 4, [[0,1], [0,2], [1,2]] -> False
-
     # DFS
     stack = [0]
     while stack:
@@ -93,5 +85,62 @@ def validTree(self, n, edges):
             graph[node] = None
             n -= 1
     return n == 0
+```
+
+Dec: 1. analysis - increase correctness 2. planning - avoid panic 3. tests - incremental - size small to large
+
+```python
+def validTree(self, n, edges):
+    # undirected graph
+    # tree properties:
+    # 1. no cycle
+    # 2. connected
+    
+    # 1. sanity check: len(edges) == n - 1, necessary condition for connectedness
+    # important! assuming no duplicate edge
+    if len(edges) != n - 1:
+        return False
+    
+    # observation: if |V| = |E| + 1, either the graph is connected or there are cycles
+    # cycle <=> disconnected
+    
+    # 2. detect cycle
+    ## two approaches: a. unifon find b. search in graph
+    ## search
+    
+    # 2.1. build graph (adjacency list), two-way edge (v->w, w->v)
+    graph = [[] for _ in range(n)]
+    for src, dest in edges:
+        graph[src].append(dest)
+        graph[dest].append(src)
+    
+    # 2.2. detect cycle: in undirected graphs, a tree is connected: can reach all others from any node
+    # DFS: be careful of backwards edge to the parent
+    visited = set()  # {int}
+    def walk(start, parent):
+        if start in visited:  # prevent exploring a node twices
+            return
+        visited.add(start)
+        for suc in graph[start]:
+            if suc != parent:  # no cycle of length 2 by definition
+                walk(suc, start)
+        
+    walk(0, -1)
+    return len(visited) == n
+
+# tests
+# 0, [] -- invalid
+# 1, []
+# 1, [[0,0]]  -- self-ref, actually valid
+# 2, [[0,1]]
+# 2, [] -- disconnected
+# 3, [[0,1],[0,2]]
+# 3, [[0,1]]
+# 3, [[0,1],[1,2]]
+# 3, [[0,1],[1,2],[2,0]]
+# 4, [[0,1],[1,2],[2,0]] -- cycle and disconnected
+# 4, [[0,1],[1,2],[2,3]]
+# 6, [[0,5],[0,1],[0,2],[1,3],[3,4]]
+# 6, [[0,5],[0,1],[1,5], [2,3],[3,4],[4,5]] -- two cycles
 ```
 

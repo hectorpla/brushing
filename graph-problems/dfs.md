@@ -6,7 +6,58 @@ description: 'Jul, Nov'
 
 ## Todo List
 
-### 785. Is Graph Bipartite?
+### 785. Is Graph Bipartite? \(evaluate on edges instead of nodes, by definition\)
+
+bug: 
+
+```python
+def isBipartite(self, graph):
+    # undirected graph
+    # several approaches
+    # 1. bipartite properties: odd-length cycle
+    # 2. DFS visit
+    
+    # core: ensure for every edge, both the ends are in different `color`
+    # natural, edges are directly given
+    
+    # impl: recursively explores all edges
+    n = len(graph)
+    color = [0] * n  # 0: uninit, 1: black, 2: white
+    def verify(node):
+        """return whether the component is bipartite"""
+        if color[node] == 0:
+            color[node] = 1  # assign color, !might be not a good place to do, check later
+        whichColor = color[node]
+        edges = graph[node]
+        while edges:  # each edge is explored once, runtime guaranteed
+            dest = edges.pop()
+            if color[dest] == 0:
+                color[dest] = 2 if whichColor == 1 else 1
+                if not verify(dest):  # bug! didn't recursively call
+                    return False
+            elif color[dest] == whichColor:
+                return False
+        return True
+    
+    # the graph is bipartite iff all components are biparity
+    return all(verify(i) for i in range(n))
+
+# tests
+# [[0]] -- self cycle
+# -- a tree
+# [[1,2],[0],[0]]
+# [[1],[0,3],[3],[1,2]]
+# -- even-length cycle
+# [[1],[0]]
+# [[1,3], [0,2], [1,3], [0,2]]
+# -- odd-length cycle
+# [[1,2],[0,2],[0,1]]
+# [[1,4],[0,2],[1,3],[2,4],[3,0]]  # larger size
+# [[1,2,3], [0,2], [0,1,3], [0,2]]
+# -- multiple components
+# [[1,3], [0,2], [1,3], [0,2], [5],[4]]
+# [[1,3], [0,2], [1,3], [0,2], [5,6], [4,6], [4,5]] 
+```
 
 
 

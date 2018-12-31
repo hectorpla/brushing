@@ -1,3 +1,7 @@
+---
+description: 'June, Dec'
+---
+
 # Flood Filling
 
 ## Flood Filling
@@ -98,4 +102,34 @@ class Solution {
 ```
 
 ### 
+
+### 841. Keys and Rooms
+
+```python
+def canVisitAllRooms(self, rooms):
+    n = len(rooms)
+    
+    # idea: explore from 0, flood fill all reachable rooms
+    # finally check if all rooms are reachable
+    reachable = [False] * n
+    
+    # O(E + V), E: # edges, V: # vertices
+    def fill(room):
+        if reachable[room]:  # room has been opened
+            return
+        reachable[room] = True
+        for out in rooms[room]:
+            fill(out)
+            
+    fill(0)
+    return all(reachable)
+
+# tests
+# [[]]
+# [[0,1],[1]]
+# [[],[1]]
+# [[0,1],[1],[2]] - disconnected
+# [[0,1,2],[],[]]
+# [[1],[2],[0]]
+```
 

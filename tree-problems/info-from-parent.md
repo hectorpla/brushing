@@ -1,10 +1,14 @@
+---
+description: 'Oct, Dec'
+---
+
 # Info from parent
 
+## Rethink:
 
+this approach doesn't seem to be a great solution; mixture of data flow direction \(from parent and children are problematic\)
 
 ### 834. Sum of Distances in Tree
-
-
 
 ### 863. All Nodes Distance K in Binary Tree
 
