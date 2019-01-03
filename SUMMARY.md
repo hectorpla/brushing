@@ -26,6 +26,8 @@
 * [Graph problems](graph-problems/README.md)
   * [Connected Components](graph-problems/connected-components/README.md)
     * [Union Find](graph-problems/connected-components/union-find.md)
+    * [765. Couples Holding Hands](graph-problems/connected-components/765.-couples-holding-hands.md)
+    * [803. Bricks Falling When Hit](graph-problems/connected-components/803.-bricks-falling-when-hit.md)
     * [924. Minimize Malware Spread](graph-problems/connected-components/924.-minimize-malware-spread.md)
   * [Tree Related](graph-problems/tree-related/README.md)
     * [Redundant Connection II](graph-problems/tree-related/redundant-connection-ii.md)
