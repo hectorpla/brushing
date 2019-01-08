@@ -115,6 +115,7 @@
 * [Greedy Algo](greedy-algo/README.md)
   * [max/min number by removal/swap](greedy-algo/max-min-number-by-removal-swap.md)
 * [Mathametics](mathametics/README.md)
+  * [Divide two numbers](mathametics/divide-two-numbers.md)
   * [1-based to 0-based](mathametics/1-based-to-0-based.md)
   * [343. Integer Break](mathametics/343.-integer-break.md)
   * [360. Sort Transformed Array](mathametics/360.-sort-transformed-array.md)
@@ -166,5 +167,10 @@
 * [Not-fit-in-memory follow-up](not-fit-in-memory-follow-up.md)
 * [Greedy vs. lazy](greedy-vs.-frugal.md)
 * [GGL 面经](ggl-mian-jing.md)
-* [Practices for bookkeeping](practices-for-bookkeeping.md)
+
+## Bookkeeping
+
+* [pointers](bookkeeping/practices-for-bookkeeping.md)
+* [Matrix traverse](bookkeeping/matrix-traverse.md)
+* [LinkedList](bookkeeping/linkedlist.md)
 
