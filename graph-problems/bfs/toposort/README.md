@@ -1,5 +1,5 @@
 ---
-description: 'Jul, Oct, Nov, Dec'
+description: 'Jul, Oct, Nov, Dec, Jan'
 ---
 
 # Toposort
@@ -49,40 +49,43 @@ def canFinish(self, numCourses, prerequisites):
 
 DFS + memo approach:
 
-take away: clever use of **all** and **any**  
-any: for early quit if find one unsatisfied  
-all: for early quit if find one satisfied
+take away: clever use of **all** and **any**
+
+Better version, care more about test cases
 
 ```python
 def canFinish(self, numCourses, prerequisites):
-    ''' DFS + memo '''
-    n = numCourses
-    graph = [[] for _ in range(n)]
-    canSolve = [None] * n
+    # directed graph, given edges
     
-    def constructGraph():
-        for suc, pred in prerequisites:
-            graph[suc].append(pred)
-            
-    def solve(course):
-        if canSolve[course] is not None:
-            return canSolve[course]
-        canSolve[course] = False
-        # as soon as we meet a predesuccesor we cannot 
-        if any(solve(pred) == False for pred in graph[course]):
-            return False
-        canSolve[course] = True
-        return True
-        
-    constructGraph()
-    return all(solve(i) for i in range(n)) # should 
+    n = numCourses
+    pre = [[] for _ in range(n)]  # record prerequisites of each course
+    for course, pred in prerequisites:
+        pre[course].append(pred)
+    
+    canFinish = [-1] * n  # -1: uncomputed, 0: not possible to finish, 1: OK
+    # DFS: canFinish(v) = canFinish(u) for all u in preprequisiteOf(v)
+    # search + memo approach
+    # O(2|V| + |E|)
+    def tryFinish(course):
+        if canFinish[course] != -1:
+            return canFinish[course]
+        canFinish[course] = 0  # if a cycle introduces this course back, then 0
+        res = all(tryFinish(dependency) for dependency in pre[course])
+        canFinish[course] = res
+        return res
+    
+    return all(tryFinish(i) == 1 for i in range(n))
 
 # tests
-# 2, [[1,0]] -> True
-# 2, [[1,0],[0,1]] -> False
-# 3, [[1,0],[1,2]] -> True
-# 3, [[1,0],[0,2], [2,1]] -> False
+# 0, []
+# 1, []
+# 2, [[0,1]]
+# 2, [[0,1],[1,0]] - fail
+# 3, [[1,0]]
+# 3, [[0,1],[1,2],[2,0]] - cycle
+# 3, [[0,1]] - disconnected
+# 4, [[0,1],[2,3]] - two components
+# 4, [[0,1],[1,2],[2,0]] - two components, cycle
+# 5, [[0,1],[0,2],[4,3],[3,0]] - a larger tree, 0 is not the root, dependencies solved from lower of the tree
 ```
-
-
 
