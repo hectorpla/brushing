@@ -1,5 +1,5 @@
 ---
-description: 'Jul, Nov'
+description: 'Jul, Nov, Jan'
 ---
 
 # Binary Search \(encoding\)
@@ -38,7 +38,34 @@ three cases: below p, above p, no
 solve it iteratively and recursively  
 follow up: what if parent pointers are given \(salesforce\):  ancestor that after the first right turn under the _above_ case 
 
-### 
+```python
+def inorderSuccessor(self, root, p):
+    # two cases: 1. successor is a descendent of p, 
+    #            2. is an ancestor of p
+    # properties of BST
+    
+    # one way to approach is like finding the clesest value
+    # the alternative: to search downwards first then from the root
+    
+    # assume no duplicates, otherwise should know the leaning convention
+    # assume p in the tree
+    result = None
+    cur = root
+    while cur:
+        if cur.val <= p.val:  # equal, bug!!! should ignore p
+            cur = cur.right
+        else:
+            result = cur
+            cur = cur.left
+    return result
+
+# tests
+# [1], 1 - no suc
+# [2,1], 1 - ancestor
+# [1,null,2], 1 - direct child
+# [1,null,3,2], 1 - deeper
+# [5,3,null,2,4], 4 - ancestor higher up
+```
 
 ### 776. Split BST
 
