@@ -166,7 +166,6 @@
 * [Structural error](structural-error.md)
 * [Not-fit-in-memory follow-up](not-fit-in-memory-follow-up.md)
 * [Greedy vs. lazy](greedy-vs.-frugal.md)
-* [GGL 面经](ggl-mian-jing.md)
 
 ## Bookkeeping
 
@@ -176,5 +175,6 @@
 
 ## Interviews
 
+* [GGL 面经](interviews/ggl-mian-jing.md)
 * [TA](interviews/ta.md)
 
