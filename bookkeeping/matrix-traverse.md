@@ -122,3 +122,70 @@ def spiralOrder(self, matrix):
 # [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
 ```
 
+### 885. Spiral Matrix III
+
+DRY: code reuse -&gt; **multiplexer - demultiplexer** technique: collapse dimensions, see the `walkThru()` function
+
+```python
+def spiralMatrixIII(self, R, C, r0, c0):
+    dirs = [(0,1), (1,0), (0,-1), (-1,0)]  # r, d, l, u
+    def endOf(i0, j0, k, d):
+        vectors = [
+            [-k, k+1],
+            [k+1, k+1],
+            [k+1, -k-1],
+            [-k-1, -k-1]
+        ]
+        vi, vj = vectors[d]
+        return i0 + vi, j0 + vj
+    
+    def walkThru(i0, j0, iEnd, jEnd):
+        """ only one dimension changes, so many tricky places """
+        # 1. decide dimension: i or j
+        di, dj = iEnd - i0, jEnd - j0
+        assert (di == 0) ^ (dj == 0)
+        
+        # 2. decide direction: increase or decrease
+        if di == 0 and not 0 <= i0 < R:
+            return
+        if dj == 0 and not 0 <= j0 < C:
+            return
+        # multiplexer: map two dimension into one: only one needs change
+        if dj == 0:
+            dx = di
+            x0, xEnd = (i0, iEnd) 
+            limitD = R
+        else:
+            dx = dj
+            x0, xEnd = (j0, jEnd)
+            limitD = C
+        step = -1 if dx < 0 else 1
+        if dx < 0:
+            start, end = min(x0 + step, limitD-1), max(xEnd, 0) - 1
+        else:
+            start, end = max(x0 + step, 0), min(xEnd, limitD-1) + 1
+        for k in range(start, end, step):
+            # de-multiplexer
+            yield [i0, k] if di == 0 else [k, j0]
+        # end
+        
+    # assume first coord is inBound
+    result = [[r0, c0]]  # the initials
+    i, j = r0, c0
+    k = 0
+    
+    while len(result) < R * C:
+        for d, (di, dj) in enumerate(dirs):
+            endI, endJ = endOf(r0, c0, k, d)
+            # print((i,j), '->', (endI, endJ), 'd:', (di, dj))
+            
+            # TODO: walk thru the line
+            result.extend(walkThru(i, j, endI, endJ))
+            
+            i, j = endI, endJ
+        k += 1
+    return result
+```
+
+
+

@@ -103,6 +103,7 @@
   * [Knapsack Problem](dynamic-programming/knapsack-problem.md)
   * [1D dp](dynamic-programming/1d-dp/README.md)
     * [Jump game](dynamic-programming/1d-dp/jump-game.md)
+    * [801. Min swap make increasing](dynamic-programming/1d-dp/801.-min-swap-make-increasing.md)
     * [House robber](dynamic-programming/1d-dp/house-robber.md)
     * [number generation](dynamic-programming/1d-dp/number-generation.md)
   * [2D dp](dynamic-programming/2d-dp/README.md)
@@ -169,6 +170,7 @@
 
 ## Bookkeeping
 
+* [Iterators](bookkeeping/iterators.md)
 * [pointers](bookkeeping/practices-for-bookkeeping.md)
 * [Matrix traverse](bookkeeping/matrix-traverse.md)
 * [LinkedList](bookkeeping/linkedlist.md)
