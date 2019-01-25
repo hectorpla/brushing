@@ -4,6 +4,10 @@ description: 'Oct, Dec'
 
 # Info from parent
 
+## Summary
+
+In this type of questions, the computation involves 
+
 ## Rethink:
 
 this approach doesn't seem to be a great solution; mixture of data flow direction \(from parent and children are problematic\)

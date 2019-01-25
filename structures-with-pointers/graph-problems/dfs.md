@@ -68,11 +68,11 @@ def isBipartite(self, graph):
 much complicated than 207/210: allow cycle the in path  
 saw Stefan's solution
 
-![First go the two red routes \(back to the depart twice\) and then lastly the green one ](../.gitbook/assets/itinerary-reconstruction-1.png)
+![First go the two red routes \(back to the depart twice\) and then lastly the green one ](../../.gitbook/assets/itinerary-reconstruction-1.png)
 
 Nov: a new method to tackle it with **queue, prove** that the path order remain unchanged after a layer \(including recursive call\) of execution
 
-![mark the edges used and continue the next level of recursion](../.gitbook/assets/reconstruct_itinerary.jpeg)
+![mark the edges used and continue the next level of recursion](../../.gitbook/assets/reconstruct_itinerary.jpeg)
 
 The **beauty** of back tracking !!!
 

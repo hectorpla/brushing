@@ -4,7 +4,7 @@ Union-find used here, but usually UF is suspectible for **directed** graph since
 
 Construction of input:
 
-![a, b, c, d, e \(from left to right, top to bottom\)](../../.gitbook/assets/redundant_connection.png)
+![a, b, c, d, e \(from left to right, top to bottom\)](../../../.gitbook/assets/redundant_connection.png)
 
 a, b, c: don't form cycles; d, e form cycles
 

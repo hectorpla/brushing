@@ -1,3 +1,7 @@
+---
+description: 'Jun. 18, Jan 19'
+---
+
 # Rotated array
 
 ### 33. Search in Rotated Sorted Array
@@ -5,6 +9,8 @@
 ![two cases: 1. mid on the lower part; 2. on the higher part](../.gitbook/assets/33_search_in_rotated_array.png)
 
 **Take-away**: make the pointer-advance statements **consistent**: lo = mid + 1
+
+cases: empty case, small cases
 
 ```python
 def search(self, nums, target):

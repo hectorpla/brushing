@@ -4,8 +4,6 @@
 
 see top sol, very neat, tree traversal by arithmetic computation
 
-
-
 ### 856. Score of Parentheses
 
 {% hint style="info" %}
@@ -17,8 +15,6 @@ only add to result when terminal nodes met
 {% endhint %}
 
 very tricky base case
-
-
 
 ```python
 def scoreOfParentheses(self, S):

@@ -73,7 +73,7 @@ def closestKValues(self, root, target, k):
     return result
 ```
 
-![in-order traverse \(iterative\)](../../.gitbook/assets/tree_in-order_iter_traverse.png)
+![in-order traverse \(iterative\)](../../../.gitbook/assets/tree_in-order_iter_traverse.png)
 
 Caveat:
 

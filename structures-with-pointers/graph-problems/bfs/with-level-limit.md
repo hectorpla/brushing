@@ -4,7 +4,7 @@
 
 
 
-![a, b, c](../../.gitbook/assets/cheapest_flight_k_stop4.png)
+![a, b, c](../../../.gitbook/assets/cheapest_flight_k_stop4.png)
 
 \(a\) should eliminate re-visit after a cycle, there is no point to do so \(prevent memory explosion\)  
 \(b\) with level limit, we will only reach the node we can reach  

@@ -113,7 +113,7 @@ can be easily solved by Union-find
 
 should identify why UF is no longer a valid method \(in some cases\)
 
-![](../.gitbook/assets/685.jpeg)
+![](../../.gitbook/assets/685.jpeg)
 
 Since UF only cares about connection \(doesn't care direction\), false positive would happen when there is a weakly connected component  
 the only case where UF fails is when **the redundant edge connects a node to its ancestor**

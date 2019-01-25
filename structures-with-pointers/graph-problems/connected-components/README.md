@@ -21,7 +21,7 @@ should identify if the graph is **directed** or **undirected**
 
 directed graph having the following properties:
 
-![](../../.gitbook/assets/565.jpeg)
+![](../../../.gitbook/assets/565.jpeg)
 
 approaches:  
 

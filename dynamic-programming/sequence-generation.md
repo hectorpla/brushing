@@ -2,7 +2,9 @@
 
 ### Grey code
 
+### 338. Counting Bits
 
+many solutions: 1. most significant bit, 2. least significant bit, 3. last set bit \(P\(x\)=P\(x&\(x−1\)\)+1\)
 
 ### 932. Beautiful Array
 

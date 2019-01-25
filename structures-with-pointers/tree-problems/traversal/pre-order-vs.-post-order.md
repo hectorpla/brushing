@@ -10,7 +10,7 @@ some thoughts:
 
 #### why top-down approach cannot be done in O\(n\): context lost
 
-![](../../.gitbook/assets/333.jpeg)
+![](../../../.gitbook/assets/333.jpeg)
 
 ```python
 def isValidBST(root, lo, hi) # (Node, int, int) -> count

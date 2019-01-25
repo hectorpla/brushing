@@ -1,6 +1,6 @@
 # Restructure \(to linked list\)
 
-![](../.gitbook/assets/img_2296.jpeg)
+![](../../.gitbook/assets/img_2296.jpeg)
 
 ### 
 

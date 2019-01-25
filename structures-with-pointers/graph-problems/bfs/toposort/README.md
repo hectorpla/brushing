@@ -8,7 +8,7 @@ description: 'Jul, Oct, Nov, Dec, Jan'
 
 two ways to tackle: 1. from every node fanning out 2. from the outmost **contour** shrinking in
 
-![start from 1-node vs. start from n-nodes](../../../.gitbook/assets/310mht_roots.png)
+![start from 1-node vs. start from n-nodes](../../../../.gitbook/assets/310mht_roots.png)
 
 two ways to perception: 1. from node, 2. from **edge**: remove edges
 

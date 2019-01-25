@@ -4,6 +4,29 @@
 
 In this problem, all edges are **directed** \(for which we cannot simply apply UF\), but the connected components always forms a **cycle** \(didn't prove it though\)
 
+{% hint style="info" %}
+Premises:
+
+1. src, dest: \[0, n-1\]， \# edge = n
+2. each node has exactly **one** out-degree
+
+Observation:
+
+start from a node, traverse alone the way, **always** terminate with meeting some node **visited** on the **linked list**
+
+Why UF is applicable to this directed graph?
+{% endhint %}
+
+### 947. Most Stones Removed with Same Row or Column \(implicit graph\)
+
+{% hint style="info" %}
+Reasoning:
+
+1. stones are connected by shared row or col
+2. disjoint components can be taken care of independently
+3. what is the max number for each component \(the move strategy?\)
+{% endhint %}
+
 ### 721. Accounts Merge
 
 good practice to implement long logic, **take-away**: planing before writing code  
@@ -63,6 +86,4 @@ def accountsMerge(self, accounts):
         
     return result
 ```
-
-
 
