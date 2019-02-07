@@ -177,6 +177,7 @@
 * [pointers](bookkeeping/practices-for-bookkeeping.md)
 * [Matrix traverse](bookkeeping/matrix-traverse.md)
 * [LinkedList](bookkeeping/linkedlist.md)
+* [LRU](bookkeeping/lru.md)
 
 ## Interviews
 
