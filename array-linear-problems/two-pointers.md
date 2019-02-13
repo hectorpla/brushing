@@ -1,5 +1,5 @@
 ---
-description: 'June, Dec'
+description: 'June, Dec 18, Feb 19'
 ---
 
 # Two Pointers
@@ -149,43 +149,32 @@ def findKthLargest(self, nums, k):
 
 ### 75. Sort Colors
 
-actually 3 pointers
-
-loop invariants: left to lo are 0s, right to ho are 2s, left to mid are 0s or 1s; **mid &gt;= lo \(bug\)**  
-post-condition: see the code
-
 ```python
-def sortColors(nums):
-    # two-way sorting, three pointers
-    i, j = 0, len(nums) - 1
-    k = 0 # the pointer between i and j
+def sortColors(self, nums: 'List[int]') -> 'None':
+    # invariant, i, j, k: i <= j <= k, 
+    # nums[o] == 0 for o in [0, i), 
+    # nums[o] == 2 for o in (k, n-1]
+    # nums[0] == 1 for o in [i, j)
     
-    while k <= j: # check termination
-        assert i <= k
-        # invariant: 
-        # nums[z] == 0 for z in [0, i) and nums[z] == 2 for z in (j, n-1]
-        # nums[z] <= 1 for z in [0, k)
-        if nums[k] == 0:
-            assert i == k or nums[i] == 1 # [0,1,1,0], took much time to think
-            nums[i], nums[k] = nums[k], nums[i]
-            i += 1                
-            k += 1 # critical and correct, safe to increase because now nums[k] == 1
-        elif nums[k] == 2:
+    n = len(nums)
+    i, j, k = 0, 0, n - 1
+    while j <= k:
+        if nums[j] == 0:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            assert nums[j] < 2
+            j += 1
+        elif nums[j] == 2:
             nums[j], nums[k] = nums[k], nums[j]
-            j -= 1
+            k -= 1
         else:
-            k += 1
-        # print(i, k, j, nums)
-        # tests
-        # [0]
-        # [1]
-        # [2]
-        # [1,0]
-        # [2,1]
-        # [2,1,0]
+            j += 1
+    # tests
+    # [0]
+    # [2,1]
+    # [1,0,2]
+    # [2,1,0]
 ```
-
-
 
 ### 360. Sort Transformed Array
 
