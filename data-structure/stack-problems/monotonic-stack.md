@@ -142,7 +142,7 @@ buggy code, order of doing things
 
 ### 456. 132 Pattern
 
-![](../.gitbook/assets/456.jpeg)
+![](../../.gitbook/assets/456.jpeg)
 
 ```python
 def find132pattern(self, nums):

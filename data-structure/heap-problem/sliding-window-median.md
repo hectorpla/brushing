@@ -11,5 +11,5 @@ O\(logn\)
 1. insert fast 
 2. **remove** fast \(remove is absent in python PQ interface\)
 
-![Interface definition](../.gitbook/assets/480.jpeg)
+![Interface definition](../../.gitbook/assets/480.jpeg)
 

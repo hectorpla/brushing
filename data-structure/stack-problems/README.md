@@ -14,8 +14,8 @@ For the first type of question. Ask before doing.
 
 ### Typical problems:
 
-* Tree traversal \(pre-, in-, post-\): **type Elem = TreeNode \|  int** ![](../.gitbook/assets/img_2284.jpeg)\*\*\*\*
-* 439 ternary expression: **type Elem = \(T \| F, \(T \| F \| d\)?, \(T \| F \| d\)\)** ![](../.gitbook/assets/img_2283.jpeg) 
+* Tree traversal \(pre-, in-, post-\): **type Elem = TreeNode \|  int** ![](../../.gitbook/assets/img_2284.jpeg)\*\*\*\*
+* 439 ternary expression: **type Elem = \(T \| F, \(T \| F \| d\)?, \(T \| F \| d\)\)** ![](../../.gitbook/assets/img_2283.jpeg) 
 * 331 verify serialization of binary tree:   $$a = b$$ 
 
 

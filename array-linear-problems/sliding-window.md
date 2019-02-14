@@ -1,3 +1,7 @@
+---
+description: 'Dec 18, Feb 19'
+---
+
 # Sliding window
 
 #### 3. Longest Substring Without Repeating Characters
@@ -95,5 +99,35 @@ def minWindow(self, s, t):
 # "aba", "aa" - duplicate
 # "bcuiopcbac", "bcc" -> "cbac" - overidden result
 # "abc", "cd" - not satisfied!!!!
+```
+
+Feb 19
+
+```python
+from collections import Counter
+def minWindow(self, s, t):
+    # maintain a window that containing all characters in T, but redundant chars on the left reduced
+    
+    char2count = Counter(t)
+    unsat = len(char2count)  # unsatisfied char
+    rge = None  # [int, int]?
+    
+    i = 0  # the left pointer
+    for j, char in enumerate(s):
+        # include the char the right pointer is pointing to
+        if char2count[char] == 1:
+            unsat -= 1
+        char2count[char] -= 1
+        # advance the left pointer
+        while i < j and char2count[s[i]] < 0:  # bug: s[i] -> char
+            char2count[s[i]] += 1
+            i += 1
+        if unsat:
+            continue
+        if not rge or j - i < rge[1] - rge[0]:
+            rge = [i, j]
+    return s[rge[0] : rge[1]+1] if rge else ""
+# tests
+# "", "A"
 ```
 
